@@ -52,6 +52,16 @@ def equalbtn_function():
             value = str(result)
             data.set(result)
     dotbuttonStatus = False
+
+# ----------   function to set value on the label ----------
+
+def btn_function (text):
+    global value
+    value = value + text
+    data.set(value)
+
+# --------- function to clear all ---------------
+ 
 def btnclear_function():
     global value
     global A
@@ -60,6 +70,9 @@ def btnclear_function():
     operator = ''
     A = 0
     data.set(value)
+
+# --------- function for operation plus , minus etc......
+
 
 def btnplus_function():
     global A
@@ -105,55 +118,7 @@ def btndivide_function():
     data.set(value)
     dotbuttonStatus = False
 
-def btn1_function ():
-    global  value
-    value = value+'1'
-    data.set(value)
 
-def btn2_function():
-    global  value
-    value = value + '2'
-    data.set(value)
-
-def btn3_function():
-    global  value
-    value = value + '3'
-    data.set(value)
-
-def btn4_function():
-    global  value
-    value = value + '4'
-    data.set(value)
-
-def btn5_function():
-    global  value
-    value = value + '5'
-    data.set(value)
-
-def btn6_function():
-    global  value
-    value = value + '6'
-    data.set(value)
-
-def btn7_function():
-    global  value
-    value = value + '7'
-    data.set(value)
-
-def btn8_function():
-    global  value
-    value = value + '8'
-    data.set(value)
-
-def btn9_function():
-    global  value
-    value = value + '9'
-    data.set(value)
-
-def btn0_function():
-    global  value
-    value = value + '0'
-    data.set(value)
 
 def btndot_function():
     global dotbuttonStatus
@@ -165,6 +130,19 @@ def btndot_function():
         data.set(value)
     else:
         data.set(value)
+# ----------- this is the function to backspace -------
+def btn_back():
+    global value
+    value = value[0:-1]
+    data.set(value)
+
+# ------- this is the function to reviw about calculator --------------
+
+def review_function():
+    messagebox.showerror('Error :','this is a simple calculator that only support 2 terms at a time eg : a+b=c .\n it wont work for axbxc=d')
+
+
+# --------------  Here  is the all the design of the calculator ---------------
 
 
 window = tkinter.Tk()
@@ -204,18 +182,24 @@ btnclear = Button(
     command=btnclear_function)
 btnclear.pack(side=LEFT,fill='y')
 
+btnBack = Button(btnrow0,text='<-',width='2',font=('Verdana',22),relief=GROOVE,border=0,command=btn_back)
+btnBack.pack(side=LEFT,fill='y')
+
+btnHelp = Button(btnrow0,text='?',width='2',font=('Verdana',22),relief=GROOVE,border=0,command=review_function)
+btnHelp.pack(side=LEFT,fill='y')
+
 # ------ first line of button goes here  -------
 
 btn1 = Button(btnrow1,text='1',font=('Verdana',22),
-              relief=GROOVE,border=0,command=btn1_function)
+              relief=GROOVE,border=0,command=lambda: btn_function('1'))
 btn1.pack(side=LEFT,expand=True,fill='both')
 
 btn2 = Button(btnrow1,text='2',font=('Verdana',22),
-              relief=GROOVE,border=0,command=btn2_function)
+              relief=GROOVE,border=0,command=lambda: btn_function('2'))
 btn2.pack(side=LEFT,expand=True,fill='both')
 
 btn3 = Button(btnrow1,text='3',font=('Verdana',22),
-              relief=GROOVE,border=0,command=btn3_function)
+              relief=GROOVE,border=0,command=lambda: btn_function('3'))
 btn3.pack(side=LEFT,expand=True,fill='both')
 
 btnplus = Button(btnrow1,text='+',font=('Verdana',22),
@@ -225,17 +209,17 @@ btnplus.pack(side=LEFT,expand=True,fill='both')
 #  -------  second line of buttons goes here --------
 
 btn4 = Button(btnrow2,text='4',font=('Verdana',22),
-              relief=GROOVE,border=0,command=btn4_function)
+              relief=GROOVE,border=0,command=lambda: btn_function('4'))
 btn4.pack(side=LEFT,expand=True,fill='both')
 
 btn5 = Button(btnrow2,text='5',
               font=('Verdana',22),
-              relief=GROOVE,border=0,command=btn5_function)
+              relief=GROOVE,border=0,command=lambda: btn_function('5'))
 btn5.pack(side=LEFT,expand=True,fill='both')
 
 btn6 = Button(btnrow2,text='6',
               font=('Verdana',22),
-              relief=GROOVE,border=0,command=btn6_function)
+              relief=GROOVE,border=0,command=lambda: btn_function('6'))
 btn6.pack(side=LEFT,expand=True,fill='both')
 
 btnminus = Button(btnrow2,text='-',
@@ -247,15 +231,16 @@ btnminus.pack(side=LEFT,expand=True,fill='both')
 
 btn7 = Button(btnrow3,text='7',
               font=('Verdana',22),
-              relief=GROOVE,border=0,command=btn7_function)
+              relief=GROOVE,border=0,command=lambda: btn_function('7'))
 btn7.pack(side=LEFT,expand=True,fill='both')
 
 btn8 = Button(btnrow3,text='8',
               font=('Verdana',22),
-              relief=GROOVE,border=0,command=btn8_function)
+              relief=GROOVE,border=0,command=lambda: btn_function('8'))
 btn8.pack(side=LEFT,expand=True,fill='both')
 
-btn9 = Button(btnrow3,text='9',font=('Verdana',22),relief=GROOVE,border=0,command=btn9_function)
+btn9 = Button(btnrow3,text='9',font=('Verdana',22),
+            relief=GROOVE,border=0,command=lambda: btn_function('9'))
 btn9.pack(side=LEFT,expand=True,fill='both')
 
 btnmultiply = Button(btnrow3,text='x',font=('Verdana',22),
@@ -264,10 +249,12 @@ btnmultiply.pack(side=LEFT,expand=True,fill='both')
 
 # --------- fourth line of buttons goes here ----------
 
-btndot = Button(btnrow4,text='.',font=('Verdana',22),relief=GROOVE,border=0,command=btndot_function)
+btndot = Button(btnrow4,text='.',font=('Verdana',22),
+                      relief=GROOVE,border=0,command=btndot_function)
 btndot.pack(side=LEFT,expand=True,fill='both')
 
-btn0 = Button(btnrow4,text='0',font=('Verdana',22),relief=GROOVE,border=0,command=btn0_function)
+btn0 = Button(btnrow4,text='0',font=('Verdana',22),
+                      relief=GROOVE,border=0,command=lambda: btn_function('0'))
 btn0.pack(side=LEFT,expand=True,fill='both')
 
 btndivide = Button(btnrow4,text='/',font=('Verdana',22),
